@@ -9,7 +9,7 @@ function App() {
   
   
   const [weather, setWeather] = useState(null);
-  const [units, setUnits] = useState("imperial");
+  const [units, setUnits] = useState("metric");
  
 
   useEffect(() => {
