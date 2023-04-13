@@ -19,10 +19,17 @@ function App() {
     };
 
 fetchWeatherData();
-  }, []);
+  }, [units]);
 
 
+  const handleUnitsClick = (e) => {
+    const button = e.currentTarget;
+    const currentUnit = button.innerText.slice(1);
 
+    const isCelsius = currentUnit === "C";
+    button.innerText = isCelsius ? "°F" : "°C";
+    setUnits(isCelsius ? "metric" : "imperial");
+  };
 
 
   return (
@@ -37,7 +44,7 @@ fetchWeatherData();
                 name="city"
                 placeholder="Enter City..."
               />
-              <button>°F</button>
+              <button onClick={(e) => handleUnitsClick(e)}>°F</button>
             </div>
 
             <div className="section section__temperature">
