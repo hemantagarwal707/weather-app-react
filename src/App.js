@@ -10,12 +10,17 @@ function App() {
   const [city, setCity] = useState("Paris");
   const [weather, setWeather] = useState(null);
   const [units, setUnits] = useState("metric");
- 
+  const [bg, setBg] = useState(hotBg);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
       const data = await getFormattedWeatherData(city,units);
       setWeather(data);
+// dynamic bg
+const threshold = units === "metric" ? 20 : 60;
+if (data.temp <= threshold) setBg(coldBg);
+else setBg(hotBg);
+
     };
 
 fetchWeatherData();
@@ -40,7 +45,7 @@ fetchWeatherData();
   };
 
   return (
-    <div className="app" style={{ backgroundImage: `url(${coldBg})` }}>
+    <div className="app" style={{ backgroundImage: `url(${bg})` }}>
       <div className="overlay">
       {weather && (
           <div className="container">
